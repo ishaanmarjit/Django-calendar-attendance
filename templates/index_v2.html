@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Time Tracker</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333333;
+      }
+
+      #calendar {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      }
+
+      .fc-day-header {
+        color: #ffffff;
+        background-color: #333333;
+      }
+
+      .fc-event {
+        background-color: #0099cc;
+        color: #ffffff;
+        padding: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      #dropdown-menu {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      }
+
+      #event-picker {
+        padding: 1px;
+        font-size: 12px;
+        border-radius: 5px;
+        border: none;
+      }
+    </style>
+    <h1>Time Tracker</h1>
+    <div id="calendar"></div>
+    <!--<div id="dropdown-menu" style="display: block">
+      <select id="event-picker">
+        <option value="">Leave</option>
+        <option value="">Working</option>
+        <option value="">Half-Day</option>
+      </select>
+    </div>-->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Initialize the calendar
+        $("#calendar").fullCalendar({
+          events: "/get-events/", // URL to get events from
+          eventClick: function (event) {
+            console.log("Event clicked: ", event);
+            // Handle event clicks here
+            $("#attendance-form").modal("show");
+          },
+        });
+      });
+    </script>
+  </body>
+</html>
